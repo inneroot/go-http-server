@@ -4,6 +4,9 @@ import (
 	"context"
 	"log/slog"
 	"net/http"
+	"time"
+
+	"github.com/inneroot/go-http-server/internal/handlers"
 )
 
 type HttpServer struct {
@@ -16,6 +19,10 @@ func New(port string, log *slog.Logger) *HttpServer {
 		log: log,
 		srv: &http.Server{
 			Addr: ":" + port,
+			Handler:      handlers.RegisterRoutes(),
+			IdleTimeout:  time.Minute,
+			ReadTimeout:  10 * time.Second,
+			WriteTimeout: 30 * time.Second,
 		},
 	}
 }

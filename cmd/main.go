@@ -6,7 +6,6 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/inneroot/go-http-server/internal/handlers"
 	"github.com/inneroot/go-http-server/internal/server"
 	"github.com/inneroot/go-http-server/pkg/logger"
 )
@@ -18,7 +17,6 @@ func main() {
 	log := logger.SetLogger()
 
 	srv := server.New("8080", log)
-	handlers.Initialize()
 	srv.Start()
 
 	<-ctx.Done() // graceful shutdown
